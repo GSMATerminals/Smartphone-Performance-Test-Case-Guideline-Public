@@ -36,8 +36,8 @@ public class WeChatTest {
         capabilities.setCapability("name", "WeChatTest " + date);
         String userDir = System.getProperty("user.dir");
         URL serverAddress;
-        String localApp = "wechat.apk";
-        System.out.println("Trying install wechat.apk to phone...");
+        String localApp = "WinXinV6.6.6.apk";
+        System.out.println("Trying install WinXinV6.6.6.apk to phone...");
         {
             String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
             capabilities.setCapability("app", appPath);
