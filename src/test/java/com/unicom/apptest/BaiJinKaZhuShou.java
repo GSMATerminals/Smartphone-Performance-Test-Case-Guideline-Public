@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class WangKaZhuShou {
+public class BaiJinKaZhuShou {
     /**
      * Keep the same date prefix to identify job sets.
      **/
@@ -46,10 +46,10 @@ public class WangKaZhuShou {
     public Integer Interval;
 
 
-    private final static String MPName = "王卡助手";
+    private final static String MPName = "白金卡助手";
     private final static String ClearScreenText = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n天王盖地虎";
     private final static String StartText1 = "排队";
-    private final static String CustomerServiceName = "微臣";
+    private final static String CustomerServiceName = "网易白金卡小助手";
     private final static String EndText1 = "没事了,搞定了,谢谢!";
     private final static String EndText2 = "打扰了,谢谢!";
     private final static int FindMPMaxRetryTimes = 5;
@@ -135,7 +135,6 @@ public class WangKaZhuShou {
 //            System.out.println("afterClass quit...");
         }
     }
-
 
     public void startAutoChat() {
         List<WebElement> els = null;
@@ -248,7 +247,6 @@ public class WangKaZhuShou {
                 System.out.println(new Date().toString() + "【" + MPName + "】" + text);
                 Reporter.log(new Date().toString() + "【" + MPName + "】" + text + "\n");
                 if (getResposeStatus()) {
-                    //成功识别,答复客服并返回
                     sendEndText1(EndText1);
                     WaitNSecond(10);
                     sendEndText2(EndText2);
@@ -362,6 +360,7 @@ public class WangKaZhuShou {
         public boolean CheckPermissionPopup() {
             List<WebElement> els = null;
             WebElement el = null;
+            //首页
             System.out.println("find【权限许可】");
             try {
                 el = androidDriver.findElementById("com.android.packageinstaller:id/permission_message");
