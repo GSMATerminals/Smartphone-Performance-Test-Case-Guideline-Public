@@ -38,9 +38,6 @@ public class BingShenKaZhuShou {
     private static final int timeoutInSeconds = 180;
 
 
-    /**
-     * 外部传入配置参数:
-     */
     public String PlatformVersion;      //Android操作系统版本
     public String DeviceName;      //设备名称（即设备序列号）
     public String WeChatNickName;  //微信号昵称
@@ -49,17 +46,14 @@ public class BingShenKaZhuShou {
     public Integer Interval;      //两次测试之间的时间间隔
 
 
-    /**
-     * 该测试用例内部配置参数
-     */
 
-    private final static String MPName = "冰神卡助手";      //被测试公众号名称
-    private final static String ClearScreenText = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n天王盖地虎";   //进入人工客服前清屏
-    private final static String StartText1 = "排队";   //进入人工客服方式
-    private final static String CustomerServiceName = "冰激凌小助手";   //人工客服名称
-    private final static String EndText1 = "没事了,搞定了,谢谢!";   //结束消息1
-    private final static String EndText2 = "打扰了,谢谢!";   //结束消息2
-    private final static int FindMPMaxRetryTimes = 5; //查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数
+    private final static String MPName = "冰神卡助手";
+    private final static String ClearScreenText = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n天王盖地虎";
+    private final static String StartText1 = "排队";
+    private final static String CustomerServiceName = "冰激凌小助手";
+    private final static String EndText1 = "没事了,搞定了,谢谢!";
+    private final static String EndText2 = "打扰了,谢谢!";
+    private final static int FindMPMaxRetryTimes = 5;
 
     @BeforeSuite
     @Parameters({"PlatformVersion", "DeviceName", "WeChatNickName", "MaxWaitTime", "Count", "Interval"})
@@ -82,14 +76,10 @@ public class BingShenKaZhuShou {
         capabilities.setCapability("noReset", "true");
         capabilities.setCapability(MobileCapabilityType.APP_PACKAGE, "com.tencent.mm");
         capabilities.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.tencent.mm.ui.LauncherUI");
-        //A new session could not be created的解决方法
         capabilities.setCapability(MobileCapabilityType.APP_WAIT_ACTIVITY, "com.tencent.mm.ui.LauncherUI");
-        //每次启动时覆盖session，否则第二次后运行会报错不能新建session
         capabilities.setCapability("sessionOverride", true);
-        //实现中文输入
-        capabilities.setCapability("unicodeKeyboard", "True");  //使用unicode编码方式发送字符串
-        capabilities.setCapability("resetKeyboard", "True");    //将键盘隐藏起来
-        //目标系统和设备配置
+        capabilities.setCapability("unicodeKeyboard", "True");
+        capabilities.setCapability("resetKeyboard", "True");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, PlatformVersion);
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DeviceName);
@@ -129,7 +119,6 @@ public class BingShenKaZhuShou {
         WebElement el = null;
         for (int i = 0; i < this.Count; i++) {
             startAutoChat();
-//            TODO:两次时间间隔不能超过60S问题原因
             if (i > 0) WaitNSecond(this.Interval);
         }
     }
@@ -146,9 +135,6 @@ public class BingShenKaZhuShou {
     }
 
 
-    /**
-     * 点击“通讯录”->“公众号”->具体公众号
-     */
     public void startAutoChat() {
         List<WebElement> els = null;
         WebElement el = null;
@@ -172,7 +158,7 @@ public class BingShenKaZhuShou {
                                 WaitNSecond(5);
                                 sendStartText(StartText1);
                                 break;
-                            } else { //返回,重新查找公众号
+                            } else {
                                 WaitNSecond(3);
                                 androidDriver.navigate().back();
                                 WaitNSecond(3);
@@ -195,7 +181,7 @@ public class BingShenKaZhuShou {
                 sEl.click();
                 System.out.println("click " + mpName);
                 WaitNSecond(3);
-            } else { //返回,重新查找公众号
+            } else {
                 System.out.println("find " + mpName + " failed!");
             }
         } else {
@@ -226,7 +212,6 @@ public class BingShenKaZhuShou {
         el = androidDriver.findElementById("com.tencent.mm:id/aas"); //find keyboard
         if (el != null) {
             el.click();
-//            System.out.println("click keyboard");
             result = true;
         }
         return result;
@@ -240,8 +225,6 @@ public class BingShenKaZhuShou {
             el = androidDriver.findElementById("com.tencent.mm:id/aag");    //找发送
             if (el != null) {
                 el.click();
-//                System.out.println(new Date().toString() + "sendClearScreenText:" + text);
-//                Reporter.log(new Date().toString() + "sendClearScreenText:" + text + "\n");
             }
         }
     }
@@ -250,17 +233,16 @@ public class BingShenKaZhuShou {
         List<WebElement> els = null;
         WebElement el = null;
         boolean result = false;
-        el = androidDriver.findElementById("com.tencent.mm:id/aaa");    //找编辑框
+        el = androidDriver.findElementById("com.tencent.mm:id/aaa");
         if (el != null) {
             el.sendKeys(text);
-            el = androidDriver.findElementById("com.tencent.mm:id/aag");    //找发送
+            el = androidDriver.findElementById("com.tencent.mm:id/aag");
             if (el != null) {
                 el.click();
                 WaitNSecond(2);
                 System.out.println(new Date().toString() + "【" + MPName + "】" + text);
                 Reporter.log(new Date().toString() + "【" + MPName + "】" + text + "\n");
                 if (getResposeStatus()) {
-                    //成功识别,答复客服并返回
                     sendEndText1(EndText1);
                     WaitNSecond(10);
                     sendEndText2(EndText2);
@@ -278,14 +260,13 @@ public class BingShenKaZhuShou {
 
     private void sendEndText1(String text) {
         WebElement el = null;
-        el = androidDriver.findElementById("com.tencent.mm:id/aaa");    //找编辑框
+        el = androidDriver.findElementById("com.tencent.mm:id/aaa");
         if (el != null) {
             el.sendKeys(text);
-            el = androidDriver.findElementById("com.tencent.mm:id/aag");    //找发送
+            el = androidDriver.findElementById("com.tencent.mm:id/aag");
             if (el != null) {
                 el.click();
                 System.out.println(new Date().toString() + "sendEndText:" + text);
-//                Reporter.log(new Date().toString() + "sendEndText:" + text + "\n");
             }
         }
     }
@@ -294,14 +275,13 @@ public class BingShenKaZhuShou {
         List<WebElement> els = null;
         WebElement el = null;
         boolean result = false;
-        el = androidDriver.findElementById("com.tencent.mm:id/aaa");    //找编辑框
+        el = androidDriver.findElementById("com.tencent.mm:id/aaa");
         if (el != null) {
             el.sendKeys(text);
-            el = androidDriver.findElementById("com.tencent.mm:id/aag");    //找发送
+            el = androidDriver.findElementById("com.tencent.mm:id/aag");
             if (el != null) {
                 el.click();
                 System.out.println(new Date().toString() + "sendEndText:" + text);
-//                Reporter.log(new Date().toString() + "sendEndText:" + text + "\n");
                 WaitNSecond(3);
                 androidDriver.navigate().back();
                 WaitNSecond(3);
@@ -319,7 +299,7 @@ public class BingShenKaZhuShou {
         Date startTime = new Date();
         while (!(getSeconds(startTime.getTime(), new Date().getTime()) > MaxWaitTime)) {
             List<String> stringArray = new ArrayList<String>();
-            els = androidDriver.findElementsById("com.tencent.mm:id/jy");    //查找客服名称
+            els = androidDriver.findElementsById("com.tencent.mm:id/jy");
             if (els.size() > 0) {
                 for (WebElement element : els) {
                     if (element.getText().contains(CustomerServiceName)) {
@@ -330,12 +310,10 @@ public class BingShenKaZhuShou {
                         result = true;
                         return result;
                     } else {
-//                        System.out.println("未发现答复" + new Date().toString());
                     }
 
                 }
             } else {
-//                System.out.println("未发现答复" + new Date().toString());
             }
             WaitNSecond(3);
         }
@@ -371,13 +349,9 @@ public class BingShenKaZhuShou {
     }
 
     public class WebEventListener implements WebDriverEventListener {
-        /**
-         * 权限许可
-         */
         public boolean CheckPermissionPopup() {
             List<WebElement> els = null;
             WebElement el = null;
-            //首页
             System.out.println("find【权限许可】");
             try {
                 el = androidDriver.findElementById("com.android.packageinstaller:id/permission_message");
@@ -396,13 +370,9 @@ public class BingShenKaZhuShou {
         }
 
 
-        /**
-         * 登陆（暂不支持首次短信验证码登陆,支持长时间未登陆失效的情况）
-         */
         public boolean CheckLogin() {
             List<WebElement> els = null;
             WebElement el = null;
-            //手机号登陆
             System.out.println("find【登陆】 ");
             try {
                 els = androidDriver.findElementsByClassName("android.widget.Button");
@@ -429,8 +399,6 @@ public class BingShenKaZhuShou {
 
         public void beforeFindBy(By by, WebElement webElement, WebDriver webDriver) {
             MyLog("beforeFindBy:" + by.toString());
-//            if (CheckLogin()) return;
-//            if (CheckPermissionPopup()) return;
         }
 
         public void afterFindBy(By by, WebElement element, WebDriver driver) {
@@ -497,7 +465,6 @@ public class BingShenKaZhuShou {
             if (ENABLE_LOG) {
                 System.out.println(text);
             }
-
         }
 
     }
