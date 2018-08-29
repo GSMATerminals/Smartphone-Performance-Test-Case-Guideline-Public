@@ -1,4 +1,4 @@
-ntroduction
+Introduction
 ---
 The GSMA TS.29 section 5 defined test cases for Smartphone Camera Image Quality Test.
 The tests are taken in different scenarios for example: photograph portrait at night, photograph the sun rise scenery, photograph indoor objects.
