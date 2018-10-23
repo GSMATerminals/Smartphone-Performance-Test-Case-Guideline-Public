@@ -21,70 +21,109 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 一个suite(套件) 由一个或多个测试组成。
+ * 一个test(测试) 由一个或多个类组成
+ * 一个class(类) 由一个或多个方法组成。 ####
+ *
+ * @BeforeSuite/@AfterSuite 在某个测试套件开始之前/在某个套件所有测试方法执行之后
+ * @BeforeTest/@AfterTest 在某个测试开始之前/在某个测试所有测试方法执行之后
+ * @BeforeClass/@AfterClass 在某个测试类开始之前/在某个类的所有测试方法执行之后
+ * @BeforeMethod/@AfterMethod 在某个测试方法之前/在某个测试方法执行之后
+ * @BeforeGroup/@AfterGroup 在某个组的所有测试方法之前/在某个组的所有测试方法执行之后
+ */
 
-public class MPBase {
+
+public abstract class MPBase {
     /**
      * Keep the same date prefix to identify job sets.
      **/
     Date date = new Date();
-    String sessionId;
-    public URL serverAddress;
-    public WebDriverWait driverWait;
-    public AndroidDriver androidDriver;
-    public WebEventListener eventListener;
-    public EventFiringWebDriver eDriver;
+    public static String sessionId;
+    public static URL serverAddress;
+    public static WebDriverWait driverWait;
+    public static AndroidDriver androidDriver;
+
+    public static WebEventListener eventListener;
+    public static EventFiringWebDriver eDriver;
+    //
     // must wait at least 60 seconds for running on Sauce.
     // waiting for 30 seconds works locally however it fails on Sauce.
-    public int timeoutInSeconds = 180;
+    public static int timeoutInSeconds = 300;
 
 
     /**
-     * 外部传入配置参数:
+     * 微信版本号适配内容,当前版本:V6.7.3
      */
-    public String PlatformVersion;      //Android操作系统版本
-    public String DeviceName;      //设备名称（即设备序列号）
-    public String WeChatNickName;  //微信号昵称
-    public int MaxWaitTime = 180; //客服响应时间最大等待时间
-    public Integer Count;      //测试次数
-    public Integer Interval;      //两次测试之间的时间间隔
+    public static String APP_APK_FILE_NAME = "WeiXinV6.7.3.apk";      //微信安装文件名称
+    public static String ELEMENT_ID_GONGZHONGHAO = "com.tencent.mm:id/a2n";      //微信版本适配--查找“公众号”按钮
+    public static String ELEMENT_ID_GONGZHONGHAO_CHUANGKOU = "com.tencent.mm:id/j6"; //微信版本适配--查找公众号对话窗口标题
+    public static String ELEMENT_ID_KEYBOARD = "com.tencent.mm:id/aiw"; //微信版本适配--查找键盘
+    public static String ELEMENT_ID_TEXT_EDIT = "com.tencent.mm:id/aie";   //微信版本适配--查找编辑框
+    public static String ELEMENT_ID_SEND_BUTTON = "com.tencent.mm:id/aik";     //微信版本适配--查找发送按钮
+    public static String ELEMENT_ID_CUSTOMER_SERVICE_LABLE = "com.tencent.mm:id/mp";   //微信版本适配--查找人工客服标签
+
+
+  /*  *//**
+     * 微信版本号适配内容,当前版本:V6.7.2
+     *//*
+    public static String APP_APK_FILE_NAME = "WeiXinV6.7.2.apk";      //微信安装文件名称
+    public static String ELEMENT_ID_GONGZHONGHAO = "com.tencent.mm:id/a01";      //微信版本适配--查找“公众号”按钮
+    public static String ELEMENT_ID_GONGZHONGHAO_CHUANGKOU = "com.tencent.mm:id/j1"; //微信版本适配--查找公众号对话窗口标题
+    public static String ELEMENT_ID_KEYBOARD = "com.tencent.mm:id/af7"; //微信版本适配--查找键盘
+    public static String ELEMENT_ID_TEXT_EDIT = "com.tencent.mm:id/aep";   //微信版本适配--查找编辑框
+    public static String ELEMENT_ID_SEND_BUTTON = "com.tencent.mm:id/aev";     //微信版本适配--查找发送按钮
+    public static String ELEMENT_ID_CUSTOMER_SERVICE_LABLE = "com.tencent.mm:id/ly";   //微信版本适配--查找人工客服标签*/
+    // TODO:(注意:王卡助手公众号的人工客服已经不能通过标签进行查找,人工客服不在显示客服名称和头像)
+
+    /**
+     * 配置文件传入微信测试全局参数,beforeSuite中使用;
+     */
+    public static String PlatformVersion;      //Android操作系统版本
+    public static String DeviceName;      //设备名称（即设备序列号）
+    public static String WeChatNickName;  //微信号昵称
 
 
     /**
-     * 该测试用例内部配置参数
+     * 配置文件传入每个公众号测试参数,beforeClass中使用;
      */
 
-    public String MPName = "公众号名称";      //被测试公众号名称
-    public String ClearScreenText = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n天王盖地虎";   //进入人工客服前清屏
-    public String StartText1 = "排队";   //进入人工客服方式
-    public String CustomerServiceName = "微臣";   //人工客服名称
-    public String EndText1 = "没事了,搞定了,谢谢!";   //结束消息1
-    public String EndText2 = "打扰了,谢谢!";   //结束消息2
-    public int FindMPMaxRetryTimes = 5; //查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数
+    public static String MPName = "公众号名称";      //被测试公众号名称
+    public static String StartCustomerServiceText = "排队";   //进入人工客服方式
+    public static String CustomerServiceName = "微臣";   //人工客服名称
+    public static String EndText1 = "没事了,搞定了,谢谢!";   //结束消息1
+    public static String EndText2 = "打扰了,谢谢!";   //结束消息2
+    public static int FindMPMaxRetryTimes = 5; //查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数
+    public static int ResponseMaxWaitTime = 180;   //客服响应最大等待实际
 
 
+    /**
+     * 全局参数初始化,
+     * 例如外部参数--Android版本号,设备名称,微信昵称,最大等待时间,循环次数,循环间隔等
+     * 内部参数--appium版本号,微信版本号,微信包名称,微信activity名称等待
+     *
+     * @param PlatformVersion
+     * @param DeviceName
+     * @param WeChatNickName
+     * @throws Exception
+     */
     @BeforeSuite
-    @Parameters({"PlatformVersion", "DeviceName", "WeChatNickName", "MaxWaitTime", "Count", "Interval"})
-    public void beforeSuite(@Optional("6.0") String PlatformVersion, @Optional("Android") String DeviceName, @Optional("mine") String WeChatNickName, @Optional("180") String MaxWaitTime, @Optional("1") String Count, @Optional("30") String Interval) {
+    @Parameters({"PlatformVersion", "DeviceName", "WeChatNickName"})
+    public void beforeSuite(@Optional("6.0") String PlatformVersion, @Optional("Android") String DeviceName, @Optional("mine") String WeChatNickName) throws Exception {
         this.PlatformVersion = PlatformVersion;
         this.DeviceName = DeviceName;
         this.WeChatNickName = WeChatNickName;
-        this.MaxWaitTime = Integer.parseInt(MaxWaitTime);
-        this.Count = Integer.parseInt(Count);
-        this.Interval = Integer.parseInt(Interval);
-    }
 
-    /**
-     * Run before each test
-     **/
-    @BeforeClass
-    public void beforeClass() throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.APPIUM_VERSION, "1.6.5");
         capabilities.setCapability("noReset", "true");
         capabilities.setCapability(MobileCapabilityType.APP_PACKAGE, "com.tencent.mm");
         capabilities.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.tencent.mm.ui.LauncherUI");
+
         //A new session could not be created的解决方法
         capabilities.setCapability(MobileCapabilityType.APP_WAIT_ACTIVITY, "com.tencent.mm.ui.LauncherUI");
+
+
         //每次启动时覆盖session，否则第二次后运行会报错不能新建session
         capabilities.setCapability("sessionOverride", true);
         //实现中文输入
@@ -97,7 +136,7 @@ public class MPBase {
 
         //set apk path
         String userDir = System.getProperty("user.dir");
-        String localApp = "WeiXinV6.6.7.apk";
+        String localApp = APP_APK_FILE_NAME;
         System.out.println("Trying install WeiXin to phone...");
         String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
         capabilities.setCapability(MobileCapabilityType.APP, appPath);
@@ -108,43 +147,54 @@ public class MPBase {
         androidDriver = new AndroidDriver(serverAddress, capabilities);
         sessionId = androidDriver.getSessionId().toString();
         androidDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-        if (this.Interval > timeoutInSeconds) {
-            driverWait = new WebDriverWait(androidDriver, this.Interval);
-        } else {
-            driverWait = new WebDriverWait(androidDriver, timeoutInSeconds);
-        }
+        driverWait = new WebDriverWait(androidDriver, timeoutInSeconds);
 
         // Initializing EventFiringWebDriver using AndroidDriver instance
         eDriver = new EventFiringWebDriver(androidDriver);
         // Now create object of EventListerHandler to register it with EventFiringWebDriver
         eventListener = new WebEventListener();
         eDriver.register(eventListener);
-
-
     }
+
+    @AfterSuite
+    public void afterSuite() throws Exception {
+        if (androidDriver != null) {
+            androidDriver.quit();
+            System.out.println("afterSuite-->androidDriver quit...");
+        }
+    }
+
+
+    /**
+     * 完成每个被测公众号内部初始化
+     **/
+    @BeforeTest
+    @Parameters({"MPName", "StartCustomerServiceText", "CustomerServiceName", "EndText1", "EndText2", "FindMPMaxRetryTimes", "ResponseMaxWaitTime"})
+    public void beforeTest(@Optional("MPName") String MPName,
+                           @Optional("启动人工客服") String StartCustomerServiceText,
+                           @Optional("客服名称") String CustomerServiceName,
+                           @Optional("EndText1") String EndText1,
+                           @Optional("EndText2") String EndText2,
+                           @Optional("5") String FindMPMaxRetryTimes,
+                           @Optional("300") String ResponseMaxWaitTime
+                           ) throws Exception {
+        //初始化公众号参数
+        this.MPName = MPName;      //被测试公众号名称
+        this.StartCustomerServiceText = StartCustomerServiceText;       //进入人工客服方式
+        this.CustomerServiceName = CustomerServiceName;       //人工客服名称
+        this.EndText1 = EndText1;     //结束消息1
+        this.EndText2 = EndText2;      //结束消息2
+        this.FindMPMaxRetryTimes = Integer.parseInt(FindMPMaxRetryTimes);   //查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数
+        this.ResponseMaxWaitTime = Integer.parseInt(ResponseMaxWaitTime);   //客服响应最大等待时间
+    }
+
 
     @Test
     public void TestEntry() {
         List<WebElement> els = null;
         WebElement el = null;
-        for (int i = 0; i < this.Count; i++) {
-            startAutoChat();
-//            TODO:两次时间间隔不能超过60S问题原因
-            if (i > 0)
-                WaitNSecond(this.Interval);
-        }
-    }
-
-    /**
-     * Run after each test
-     **/
-    @AfterClass
-    public void afterClass() throws Exception {
-        if (androidDriver != null) {
-            androidDriver.quit();
-//            System.out.println("afterClass quit...");
-        }
+        startAutoChat();
+//        WaitNSecond(60); //TODO:两次时间间隔不能超过60S问题原因
     }
 
 
@@ -154,14 +204,21 @@ public class MPBase {
     public void startAutoChat() {
         List<WebElement> els = null;
         WebElement el = null;
+//        System.out.println("startAutoChat-->className:" + Thread.currentThread().getStackTrace()[3].getClassName());
+//            System.out.println("androidDriver-->" + androidDriver.toString());
+//            System.out.println("eDriver-->" + eDriver.toString());
         try {
             System.out.println("find【通讯录】");
-            els = eDriver.findElements(By.className("android.widget.TextView"));
+            if (eDriver == null) {
+                System.out.println("error eDriver==null!");
+            } else {
+                els = eDriver.findElements(By.className("android.widget.TextView"));
+            }
             for (WebElement e : els) {
                 if (e.getText().equals("通讯录")) {
                     e.click();
                     System.out.println("click 通讯录");
-                    el = androidDriver.findElementById("com.tencent.mm:id/xs");
+                    el = androidDriver.findElementById(ELEMENT_ID_GONGZHONGHAO);
                     if (el != null) {
                         System.out.println("click 公众号");
                         el.click();
@@ -170,9 +227,9 @@ public class MPBase {
                         for (int i = 0; i < FindMPMaxRetryTimes; i++) {
                             if (checkMPName(MPName)) {
                                 findKeyBoard();
-                                sendClearScreenText(ClearScreenText);
+                                sendClearScreenText("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n天王盖地虎");
                                 WaitNSecond(5);
-                                sendStartText(StartText1);
+                                sendStartText(StartCustomerServiceText);
                                 break;
                             } else { //返回,重新查找公众号
                                 WaitNSecond(3);
@@ -208,7 +265,7 @@ public class MPBase {
     private boolean checkMPName(String mpName) {
         List<WebElement> els = null;
         WebElement el = null;
-        el = androidDriver.findElementById("com.tencent.mm:id/hm"); //查找公众号对话窗口标题,核对名称
+        el = androidDriver.findElementById(ELEMENT_ID_GONGZHONGHAO_CHUANGKOU);
         if (el != null) {
             if (el.getText().equals(mpName)) {
                 return true;
@@ -225,7 +282,7 @@ public class MPBase {
         List<WebElement> els = null;
         WebElement el = null;
         boolean result = false;
-        el = androidDriver.findElementById("com.tencent.mm:id/acp"); //find keyboard V6.6.6:aas
+        el = androidDriver.findElementById(ELEMENT_ID_KEYBOARD);
         if (el != null) {
             el.click();
 //            System.out.println("click keyboard");
@@ -236,10 +293,10 @@ public class MPBase {
 
     private void sendClearScreenText(String text) {
         WebElement el = null;
-        el = androidDriver.findElementById("com.tencent.mm:id/ac8");    //找编辑框
+        el = androidDriver.findElementById(ELEMENT_ID_TEXT_EDIT);    //找编辑框
         if (el != null) {
             el.sendKeys(text);
-            el = androidDriver.findElementById("com.tencent.mm:id/acd");    //找发送
+            el = androidDriver.findElementById(ELEMENT_ID_SEND_BUTTON);    //找发送按钮
             if (el != null) {
                 el.click();
 //                System.out.println(new Date().toString() + "sendClearScreenText:" + text);
@@ -252,10 +309,10 @@ public class MPBase {
         List<WebElement> els = null;
         WebElement el = null;
         boolean result = false;
-        el = androidDriver.findElementById("com.tencent.mm:id/ac8");    //找编辑框 V6.6.6:aaa
+        el = androidDriver.findElementById(ELEMENT_ID_TEXT_EDIT);    //找编辑框
         if (el != null) {
             el.sendKeys(text);
-            el = androidDriver.findElementById("com.tencent.mm:id/acd");    //找发送 V6.6.6:aag
+            el = androidDriver.findElementById(ELEMENT_ID_SEND_BUTTON); //找发送按钮
             if (el != null) {
                 el.click();
                 WaitNSecond(2);
@@ -280,10 +337,10 @@ public class MPBase {
 
     private void sendEndText1(String text) {
         WebElement el = null;
-        el = androidDriver.findElementById("com.tencent.mm:id/ac8");    //找编辑框
+        el = androidDriver.findElementById(ELEMENT_ID_TEXT_EDIT);  //找编辑框
         if (el != null) {
             el.sendKeys(text);
-            el = androidDriver.findElementById("com.tencent.mm:id/acd");    //找发送
+            el = androidDriver.findElementById(ELEMENT_ID_SEND_BUTTON); //找发送按钮
             if (el != null) {
                 el.click();
                 System.out.println(new Date().toString() + "sendEndText:" + text);
@@ -296,10 +353,10 @@ public class MPBase {
         List<WebElement> els = null;
         WebElement el = null;
         boolean result = false;
-        el = androidDriver.findElementById("com.tencent.mm:id/ac8");    //找编辑框
+        el = androidDriver.findElementById(ELEMENT_ID_TEXT_EDIT);  //找编辑框
         if (el != null) {
             el.sendKeys(text);
-            el = androidDriver.findElementById("com.tencent.mm:id/acd");    //找发送
+            el = androidDriver.findElementById(ELEMENT_ID_SEND_BUTTON); //找发送按钮
             if (el != null) {
                 el.click();
                 System.out.println(new Date().toString() + "sendEndText:" + text);
@@ -319,9 +376,9 @@ public class MPBase {
         WebElement el = null;
         boolean result = false;
         Date startTime = new Date();
-        while (!(getSeconds(startTime.getTime(), new Date().getTime()) > MaxWaitTime)) {
+        while (!(getSeconds(startTime.getTime(), new Date().getTime()) > this.ResponseMaxWaitTime)) {
             List<String> stringArray = new ArrayList<String>();
-            els = androidDriver.findElementsById("com.tencent.mm:id/kg");    //查找客服名称 V6.6.6:jy
+            els = androidDriver.findElementsById(ELEMENT_ID_CUSTOMER_SERVICE_LABLE);   //查找客服名称
             if (els.size() > 0) {
                 for (WebElement element : els) {
                     if (element.getText().contains(CustomerServiceName)) {
