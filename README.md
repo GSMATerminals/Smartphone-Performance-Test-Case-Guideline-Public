@@ -25,13 +25,6 @@ To run a single test, run:
 
     mvn -Dtest=com.unicom.apptest.QQMusicTest test
 
-##Test Case Introduction
-    1. QQMusic Test Steps:
-        1) Start QQMusic.
-        2) Find "skip" button and click to skip splash window.
-        3) Find "more" button and click "exit" button to exit.
-    2. WeChat Test Steps:
-        1) Start WeChat.
-        2) Find and click "login" button.
-        3) Find "phonenumber" EditText and input 18600000000.
-        4) Exit app.
+##TestNG start command:
+java -classpath "./target/test-classes" -Djava.ext.dirs=lib org.testng.TestNG -suitethreadpoolsize 1 testng.xml
+
