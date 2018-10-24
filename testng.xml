@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="suite1" junit="false" verbose="5" parallel="false" thread-count="1" configfailurepolicy="continue">
+    <!--Appium服务端配置参数-->
+    <parameter name="port" value="4723"/>
+    <parameter name="udid" value="Android"/>
+
+
+    <!---!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!微信自动化测试全局配置参数!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <parameter name="PlatformVersion" value="6.0"/><!--Android操作系统版本,例如 6.0 7.0 8.0-->
+    <parameter name="DeviceName" value="Android"/><!--设备名称（或设备序列号）-->
+    <parameter name="WeChatNickName" value="mine"/><!--测试用微信昵称-->
+
+
+    <!---!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!不同公众号及其配置参数!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <!--哔哩哔哩卡-->
+    <test name="BiLiBiLi2233Ka">
+        <classes>
+            <class name="com.unicom.apptest.BiLiBiLi2233Ka"/>
+            <parameter name="MPName" value="2233卡助手"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="排队"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="哔哩哔哩"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+    <!--凯旋服务-->
+    <test name="KaiXuanFuWu">
+        <classes>
+            <class name="com.unicom.apptest.KaiXuanFuWu"/>
+            <parameter name="MPName" value="凯旋服务"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="排队"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="凯旋通小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+    <!--程卡助手-->
+    <test name="ChengKaZhuShou">
+        <classes>
+            <class name="com.unicom.apptest.ChengKaZhuShou"/>
+            <parameter name="MPName" value="程卡助手"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="程卡小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+
+    <!--橙卡之家-->
+    <test name="ChengKaZhiJia">
+        <classes>
+            <class name="com.unicom.apptest.ChengKaZhiJia"/>
+            <parameter name="MPName" value="橙卡之家"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="橙卡小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+
+    <!--王卡服务-->
+    <test name="WangKaFuWu">
+        <classes>
+            <class name="com.unicom.apptest.WangKaFuWu"/>
+            <parameter name="MPName" value="王卡服务"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="滴滴王卡小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="ClearScreenText" value="
+
+
+            天王盖地虎"/> <!--清屏文字-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+
+    <!--帮帮卡助手-->
+    <test name="BangBangKaZhuShou">
+        <classes>
+            <class name="com.unicom.apptest.BangBangKaZhuShou"/>
+            <parameter name="MPName" value="帮帮卡助手"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="帮帮卡小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+    <!--满卡之家-->
+    <test name="ManKaZhiJia">
+        <classes>
+            <class name="com.unicom.apptest.ManKaZhiJia"/>
+            <parameter name="MPName" value="帮帮卡助手"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="满满卡小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+    <!--WeSim小助手-->
+    <test name="WeSimXiaoZhuShou">
+        <classes>
+            <class name="com.unicom.apptest.WeSimXiaoZhuShou"/>
+            <parameter name="MPName" value="WeSim小助手"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="WeSim客服"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+
+    <!--摩王卡助手-->
+    <test name="MoWangKaZhuShou">
+        <classes>
+            <class name="com.unicom.apptest.MoWangKaZhuShou"/>
+            <parameter name="MPName" value="摩王卡助手"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="摩王卡小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+
+    <!--畅视卡助手-->
+    <test name="ChangShiKaZhuShou">
+        <classes>
+            <class name="com.unicom.apptest.ChangShiKaZhuShou"/>
+            <parameter name="MPName" value="畅视卡助手"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="畅视小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+    <!--抠抠团-->
+    <test name="KouKouTuan">
+        <classes>
+            <class name="com.unicom.apptest.KouKouTuan"/>
+            <parameter name="MPName" value="抠抠团"/>  <!--被测试公众号名称-->
+            <parameter name="StartCustomerServiceText" value="客服"/><!--进入人工客服方式-->
+            <parameter name="CustomerServiceName" value="抠抠团小助手"/><!--人工客服名称关键字-->
+            <parameter name="EndText1" value="没事了,搞定了,谢谢!"/><!--结束消息1-->
+            <parameter name="EndText2" value="打扰了,谢谢!"/><!--结束消息2-->
+            <parameter name="FindMPMaxRetryTimes" value="5"/><!--查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数-->
+            <parameter name="ResponseMaxWaitTime" value="300"/><!--客服响应最大等待时间（单位:秒）-->
+        </classes>
+    </test>
+
+
+    <!--&lt;!&ndash;王卡助手&ndash;&gt;-->
+    <!--<test name="WangKaZhuShou">-->
+    <!--<classes>-->
+    <!--<class name="com.unicom.apptest.WangKaZhuShou"/>-->
+    <!--<parameter name="MPName" value="王卡助手"/>  &lt;!&ndash;被测试公众号名称&ndash;&gt;-->
+    <!--<parameter name="StartCustomerServiceText" value="排队"/>&lt;!&ndash;进入人工客服方式&ndash;&gt;-->
+    <!--<parameter name="CustomerServiceName" value="微臣"/>&lt;!&ndash;人工客服名称关键字&ndash;&gt;-->
+    <!--<parameter name="EndText1" value="没事了,搞定了,谢谢!"/>&lt;!&ndash;结束消息1&ndash;&gt;-->
+    <!--<parameter name="EndText2" value="打扰了,谢谢!"/>&lt;!&ndash;结束消息2&ndash;&gt;-->
+    <!--<parameter name="FindMPMaxRetryTimes" value="5"/>&lt;!&ndash;查找公众号偶尔错误,所以允许重新查找,这里定义最大重试次数&ndash;&gt;-->
+    <!--<parameter name="ResponseMaxWaitTime" value="300"/>&lt;!&ndash;客服响应最大等待时间（单位:秒）&ndash;&gt;-->
+    <!--</classes>-->
+    <!--</test>-->
+
+
+</suite>
