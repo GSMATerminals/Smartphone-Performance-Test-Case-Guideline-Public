@@ -1,4 +1,4 @@
-Smartphone-Performance-Test-Case run with appium.
+WeChat autotest run with appium.
 ---
 In order to run the tests, you will need to install [Apache Maven](http://maven.apache.org),
 and Appium (according to the Appium [installation instructions](https://github.com/appium/appium).
