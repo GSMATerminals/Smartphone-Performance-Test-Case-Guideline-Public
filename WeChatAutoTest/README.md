@@ -21,10 +21,22 @@ To compile and run all tests, run:
 
     mvn clean test
 
-To run a single test, run:
+To run a single APP_ACTIVITY, run:
 
-    mvn -Dtest=com.unicom.apptest.QQMusicTest test
+    mvn -Dtest=com.yixia.live.activity.SplashNewActivity test
 
-##TestNG start command:
+
+###TestNG export maven dependencies to directory:
+dependency:copy-dependencies -DoutputDirectory=lib
+
+###TestNG start command:
 java -classpath "./target/test-classes" -Djava.ext.dirs=lib org.testng.TestNG -suitethreadpoolsize 1 testng.xml
 
+###Release include directory:
+    lib
+    sdk-tools-windows
+    target
+    Tools
+    autoTest.bat
+    testng.xml
+    WeiXinV6.7.2.apk
