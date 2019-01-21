@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Wechart APP start up success rate testing">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Wechart APP start up success rate testing/hellocharts-library-1.5.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Wechart APP start up success rate testing/android-support-v4-5.1.0-r8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

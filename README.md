@@ -25,6 +25,3 @@ The tests are taken in different scenarios for example: photograph portrait at n
 Here we give the photo examples and score evaluations so that people can take a reference and understand how to choose the photograph scenarios.
 
 
-5. WeChat Auto test
-
-WeChat autotest run with appium to automatically start up WeChat and chat with customer service number.
