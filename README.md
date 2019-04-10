@@ -24,4 +24,8 @@ The GSMA TS.29 section 5 defined test cases for Smartphone Camera Image Quality 
 The tests are taken in different scenarios for example: photograph portrait at night, photograph the sun rise scenery, photograph indoor objects.
 Here we give the photo examples and score evaluations so that people can take a reference and understand how to choose the photograph scenarios.
 
+5. Browser Performance Test
 
+TS.29 defined the test cases for smartphone browser performances. Five test webpages have been created together with their associated files. Testers could use these webpages for repeatbal testing. Before testing, download the files onto a local web server that is accessible to the terminal.
+It is recommended to place the files in five different folders of the server so the page and its contents are reloaded instead of taken from the cache of the mobile device during the test.
+For the detailed test cases, please find them in the GSMA official website.
