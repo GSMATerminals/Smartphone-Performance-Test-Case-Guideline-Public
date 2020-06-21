@@ -99,6 +99,27 @@ public class MainActivity extends Activity {
         Xdata = insertStringElement(Xdata,"Brower");
         buildCharts(Xdata,score);
     }
+    
+     /**
+     * 单次执行
+     * @param view
+     */
+    public void Once_run(View view){
+        int time1 = (int)BaseAccessibilityService.getInstance().call();
+        int time2 = (int)BaseAccessibilityService.getInstance().camera();
+        int time3 = (int)BaseAccessibilityService.getInstance().photo();
+        int time4 = (int)BaseAccessibilityService.getInstance().message();
+        BaseAccessibilityService.getInstance().Home();
+        score = insertIntElement(score, time1);
+        score = insertIntElement(score, time2);
+        score = insertIntElement(score,time3);
+        score = insertIntElement(score,time4);
+        Xdata = insertStringElement(Xdata,"Call");
+        Xdata = insertStringElement(Xdata,"Camera");
+        Xdata = insertStringElement(Xdata,"Photo");
+        Xdata = insertStringElement(Xdata,"Message");
+        buildCharts(Xdata,score);
+    }
 
 
     @Override

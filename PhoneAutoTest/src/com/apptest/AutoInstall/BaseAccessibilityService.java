@@ -80,6 +80,36 @@ public class BaseAccessibilityService extends AccessibilityService {
         sendBroadcast(intent);
     }
 
+ /**
+     * 拨打电话
+     * @return
+     */
+    public long call(){
+        Home();
+        Date start = new Date();
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
+        Date end = new Date();
+        long time = end.getTime() -start.getTime();
+        return time;
+    }
+
+    /**
+     * 发送信息
+     * @return
+     */
+    public long message(){
+        Home();
+        Date start = new Date();
+        Uri uri = Uri.parse("smsto:13800000000");
+        Intent intent = new Intent(Intent.ACTION_SENDTO,uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
+        Date end = new Date();
+        long time = end.getTime() -start.getTime();
+        return time;
+    }
     /**
      * 邮箱
      * @return
@@ -127,6 +157,37 @@ public class BaseAccessibilityService extends AccessibilityService {
         Date start = new Date();
         Uri uri = Uri.parse("geo: 38.899533, -77.036476");
         Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
+        Date end = new Date();
+        long time = end.getTime() -start.getTime();
+        return time;
+    }
+    
+    /**
+     * 打开相机
+     * @return
+     */
+    public long camera(){
+        Home();
+        Date start = new Date();
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
+        Date end = new Date();
+        long time = end.getTime() - start.getTime();
+        return time;
+    }
+
+    /**
+     * 打开相册
+     * @return
+     */
+    public long photo(){
+        Home();
+        Date start = new Date();
+        Intent intent = new Intent(Intent.ACTION_PICK,null);
+        intent  .setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
         Date end = new Date();
