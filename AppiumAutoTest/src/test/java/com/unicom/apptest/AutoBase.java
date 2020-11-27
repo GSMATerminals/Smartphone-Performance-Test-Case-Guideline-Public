@@ -23,15 +23,15 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 一个suite(套件) 由一个或多个测试组成。
-         * 一个test(测试) 由一个或多个类组成
-         * 一个class(类) 由一个或多个方法组成。 ####
-         *
-         * @BeforeSuite/@AfterSuite 在某个测试套件开始之前/在某个套件所有测试方法执行之后
-        * @BeforeTest/@AfterTest 在某个测试开始之前/在某个测试所有测试方法执行之后
-        * @BeforeClass/@AfterClass 在某个测试类开始之前/在某个类的所有测试方法执行之后
-        * @BeforeMethod/@AfterMethod 在某个测试方法之前/在某个测试方法执行之后
-        * @BeforeGroup/@AfterGroup 在某个组的所有测试方法之前/在某个组的所有测试方法执行之后
-        */
+ * 一个test(测试) 由一个或多个类组成
+ * 一个class(类) 由一个或多个方法组成。 ####
+ *
+ * @BeforeSuite/@AfterSuite 在某个测试套件开始之前/在某个套件所有测试方法执行之后
+ * @BeforeTest/@AfterTest 在某个测试开始之前/在某个测试所有测试方法执行之后
+ * @BeforeClass/@AfterClass 在某个测试类开始之前/在某个类的所有测试方法执行之后
+ * @BeforeMethod/@AfterMethod 在某个测试方法之前/在某个测试方法执行之后
+ * @BeforeGroup/@AfterGroup 在某个组的所有测试方法之前/在某个组的所有测试方法执行之后
+ */
 
 
 public abstract class AutoBase {
@@ -52,9 +52,7 @@ public abstract class AutoBase {
     public static int timeoutInSeconds = 300;
 
 
-
     /**
-     *
      * @param PlatformVersion
      * @param DeviceName
      * @param WeChatNickName
@@ -109,6 +107,31 @@ public abstract class AutoBase {
         eDriver.register(eventListener);
     }
 
+
+    public static String param1 = "";
+
+    /**
+     * auto test init
+     **/
+    @BeforeTest
+    @Parameters({"param1"})
+    public void beforeTest(@Optional("param1") String param1,
+                           ) throws Exception {
+        this.param1 = param1;
+    }
+
+
+    /**
+     * auto test entry
+     */
+    @Test
+    public void TestEntry() {
+        List<WebElement> els = null;
+        WebElement el = null;
+        //TODO:add test body
+
+    }
+
     @AfterSuite
     public void afterSuite() throws Exception {
         if (androidDriver != null) {
@@ -116,7 +139,6 @@ public abstract class AutoBase {
             System.out.println("afterSuite-->androidDriver quit...");
         }
     }
-
 
 
 }
