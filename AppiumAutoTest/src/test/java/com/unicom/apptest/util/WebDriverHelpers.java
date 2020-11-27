@@ -29,4 +29,46 @@ public abstract class WebDriverHelpers {
     driverWait = new WebDriverWait(webDriver, timeoutInSeconds);
   }
 
+  /**
+   * Set implicit wait in seconds *
+   */
+  public static void setWait(int seconds) {
+    driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+  }
+
+  /**
+   * Return an element by locator *
+   */
+  public static WebElement element(By locator) {
+    return driver.findElement(locator);
+  }
+
+  /**
+   * Return a list of elements by locator *
+   */
+  public static List<WebElement> elements(By locator) {
+    return driver.findElements(locator);
+  }
+
+  /**
+   * Press the back button *
+   */
+  public static void back() {
+    driver.navigate().back();
+  }
+
+  /**
+   * Return a list of elements by tag name *
+   */
+  public static List<WebElement> tags(String tagName) {
+    return elements(for_tags(tagName));
+  }
+
+  /**
+   * Return a tag name locator *
+   */
+  public static By for_tags(String tagName) {
+    return By.className(tagName);
+  }
+
 }
