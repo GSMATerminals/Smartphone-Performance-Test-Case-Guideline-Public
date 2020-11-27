@@ -22,15 +22,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 一个suite(套件) 由一个或多个测试组成。
- * 一个test(测试) 由一个或多个类组成
- * 一个class(类) 由一个或多个方法组成。 ####
+ * a test suite struture
  *
- * @BeforeSuite/@AfterSuite 在某个测试套件开始之前/在某个套件所有测试方法执行之后
- * @BeforeTest/@AfterTest 在某个测试开始之前/在某个测试所有测试方法执行之后
- * @BeforeClass/@AfterClass 在某个测试类开始之前/在某个类的所有测试方法执行之后
- * @BeforeMethod/@AfterMethod 在某个测试方法之前/在某个测试方法执行之后
- * @BeforeGroup/@AfterGroup 在某个组的所有测试方法之前/在某个组的所有测试方法执行之后
+ * @BeforeSuite/@AfterSuite
+ * @BeforeTest/@AfterTest
+ * @BeforeClass/@AfterClass
+ * @BeforeMethod/@AfterMethod
+ * @BeforeGroup/@AfterGroup
  */
 
 
@@ -71,16 +69,17 @@ public abstract class AutoBase {
         capabilities.setCapability(MobileCapabilityType.APP_PACKAGE, "com.tencent.mm");
         capabilities.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.tencent.mm.ui.LauncherUI");
 
-        //A new session could not be created的解决方法
+        //Resolve problem: a new session could not be created
         capabilities.setCapability(MobileCapabilityType.APP_WAIT_ACTIVITY, "com.tencent.mm.ui.LauncherUI");
 
 
-        //每次启动时覆盖session，否则第二次后运行会报错不能新建session
+        //set sessionOverride to avoid cant't create session on next test.
         capabilities.setCapability("sessionOverride", true);
-        //实现中文输入
-        capabilities.setCapability("unicodeKeyboard", "True");  //使用unicode编码方式发送字符串
-        capabilities.setCapability("resetKeyboard", "True");    //将键盘隐藏起来
-        //目标系统和设备配置
+        //set unicode encoding
+        capabilities.setCapability("unicodeKeyboard", "True");
+        //hide keyboard
+        capabilities.setCapability("resetKeyboard", "True");
+        //set target OS
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, PlatformVersion);
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DeviceName);
