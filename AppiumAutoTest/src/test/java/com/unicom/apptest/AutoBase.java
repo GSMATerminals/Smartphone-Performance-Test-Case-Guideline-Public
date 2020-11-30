@@ -139,5 +139,22 @@ public abstract class AutoBase {
         }
     }
 
+    public boolean ENABLE_LOG = false;
+
+    public void MyLog(String text) {
+        if (ENABLE_LOG) {
+            System.out.println(text);
+        }
+
+    }
+
+    public void beforeFindBy(By by, WebElement webElement, WebDriver webDriver) {
+        MyLog("beforeFindBy:" + by.toString());
+    }
+
+    public void afterFindBy(By by, WebElement element, WebDriver driver) {
+        MyLog("afterFindBy:" + by.toString());
+    }
+
 
 }
