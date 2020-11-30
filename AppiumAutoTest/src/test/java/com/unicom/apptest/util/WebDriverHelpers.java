@@ -120,4 +120,29 @@ public abstract class WebDriverHelpers {
             "\",\"" + value + "\"), \"" + value + "\") or @resource-id=\"" + value + "\"]");
   }
 
+  public static WebElement find(String value) {
+    return element(for_find(value));
+  }
+
+  /**
+   * Wait 30 seconds for locator to find an element *
+   */
+  public static WebElement wait(By locator) {
+    return driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+  }
+
+  /**
+   * Wait 60 seconds for locator to find all elements *
+   */
+  public static List<WebElement> waitAll(By locator) {
+    return driverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+  }
+
+  /**
+   * Wait 60 seconds for locator to not find a visible element *
+   */
+  public static boolean waitInvisible(By locator) {
+    return driverWait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+  }
+
 }
