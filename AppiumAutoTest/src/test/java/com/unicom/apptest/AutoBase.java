@@ -156,5 +156,13 @@ public abstract class AutoBase {
         MyLog("afterFindBy:" + by.toString());
     }
 
+    public void beforeNavigateTo(String url, WebDriver driver) {
+        MyLog("beforeNavigateTo:'" + url + "'");
+    }
+
+    public void afterNavigateTo(String url, WebDriver driver) {
+        MyLog("afterNavigateTo:'" + url + "'");
+    }
+
 
 }
