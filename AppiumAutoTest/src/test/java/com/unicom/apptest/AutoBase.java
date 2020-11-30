@@ -164,5 +164,13 @@ public abstract class AutoBase {
         MyLog("afterNavigateTo:'" + url + "'");
     }
 
+    public void beforeChangeValueOf(WebElement element, WebDriver driver) {
+        MyLog("beforeChangeValueOf:" + element.toString());
+    }
+
+    public void afterChangeValueOf(WebElement element, WebDriver driver) {
+        MyLog("afterChangeValueOf:" + element.toString());
+    }
+
 
 }
