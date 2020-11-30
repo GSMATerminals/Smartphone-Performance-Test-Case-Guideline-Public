@@ -99,4 +99,25 @@ public abstract class WebDriverHelpers {
     return By.xpath("//android.widget.TextView[contains(@text, '" + text + "')]");
   }
 
+  /**
+   * Return a static text element by exact text *
+   */
+  public static WebElement text_exact(String text) {
+    return element(for_text_exact(text));
+  }
+
+  /**
+   * Return a static text locator by exact text *
+   */
+  public static By for_text_exact(String text) {
+    return By.xpath("//android.widget.TextView[@text='" + text + "']");
+  }
+
+  public static By for_find(String value) {
+    return By.xpath("//*[@content-desc=\"" + value + "\" or @resource-id=\"" + value +
+            "\" or @text=\"" + value + "\"] | //*[contains(translate(@content-desc,\"" + value +
+            "\",\"" + value + "\"), \"" + value + "\") or contains(translate(@text,\"" + value +
+            "\",\"" + value + "\"), \"" + value + "\") or @resource-id=\"" + value + "\"]");
+  }
+
 }
