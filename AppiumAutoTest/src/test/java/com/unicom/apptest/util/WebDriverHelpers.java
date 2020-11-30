@@ -71,4 +71,18 @@ public abstract class WebDriverHelpers {
     return By.className(tagName);
   }
 
+  /**
+   * Return a static text element by xpath index *
+   */
+  public static WebElement s_text(int xpathIndex) {
+    return element(for_text(xpathIndex));
+  }
+
+  /**
+   * Return a static text locator by xpath index *
+   */
+  public static By for_text(int xpathIndex) {
+    return By.xpath("//android.widget.TextView[" + xpathIndex + "]");
+  }
+
 }
