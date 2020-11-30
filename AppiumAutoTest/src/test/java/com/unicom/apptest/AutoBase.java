@@ -172,5 +172,13 @@ public abstract class AutoBase {
         MyLog("afterChangeValueOf:" + element.toString());
     }
 
+    public void beforeClickOn(WebElement element, WebDriver driver) {
+        MyLog("beforeClickOn:" + element.toString());
+    }
+
+    public void afterClickOn(WebElement element, WebDriver driver) {
+        MyLog("afterClickOn:" + element.toString());
+    }
+
 
 }
