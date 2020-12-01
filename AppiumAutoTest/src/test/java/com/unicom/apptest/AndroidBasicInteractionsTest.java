@@ -37,4 +37,17 @@ public class AndroidBasicInteractionsTest extends BaseTest {
         }
     }
 
+    @Test()
+    public void testSendKeys() {
+        driver.startActivity(new Activity(PACKAGE, SEARCH_ACTIVITY));
+        AndroidElement searchBoxEl = (AndroidElement) driver.findElementById("txt_query_prefill");
+        searchBoxEl.sendKeys("Hello world!");
+        AndroidElement onSearchRequestedBtn = (AndroidElement) driver.findElementById("btn_start_search");
+        onSearchRequestedBtn.click();
+        AndroidElement searchText = (AndroidElement) new WebDriverWait(driver, 30)
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/search_src_text")));
+        String searchTextValue = searchText.getText();
+        Assert.assertEquals(searchTextValue, "Hello world!");
+    }
+
 }
