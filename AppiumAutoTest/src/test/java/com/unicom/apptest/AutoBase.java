@@ -196,5 +196,17 @@ public abstract class AutoBase {
         MyLog("afterNavigateForward");
     }
 
+    public void beforeScript(String script, WebDriver driver) {
+        MyLog("beforeScript: " + script);
+    }
+
+    public void afterScript(String script, WebDriver driver) {
+        MyLog("afterScript: " + script);
+    }
+
+    public void onException(Throwable error, WebDriver driver) {
+        MyLog("onException: " + error);
+    }
+
 
 }
