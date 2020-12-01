@@ -180,5 +180,21 @@ public abstract class AutoBase {
         MyLog("afterClickOn:" + element.toString());
     }
 
+    public void beforeNavigateBack(WebDriver driver) {
+        MyLog("beforeNavigateBack");
+    }
+
+    public void afterNavigateBack(WebDriver driver) {
+        MyLog("afterNavigateBack");
+    }
+
+    public void beforeNavigateForward(WebDriver driver) {
+        MyLog("beforeNavigateForward");
+    }
+
+    public void afterNavigateForward(WebDriver driver) {
+        MyLog("afterNavigateForward");
+    }
+
 
 }
