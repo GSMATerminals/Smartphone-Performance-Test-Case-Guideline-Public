@@ -54,6 +54,22 @@ public class IOSBasicInteractionsTest extends BaseTest {
         */
         capabilities.setCapability("platformVersion", platformVersion == null ? "11.1" : platformVersion);
 
+        /*
+        It is recommended to set a full path to the app being tested.
+        Appium for iOS supports .app and .ipa application bundles.
+        It is also possible to pass zipped .app packages (they will be extracted automatically).
+
+        Make sure the application is built for correct architecture (either
+        real device or Simulator) before running your tests, as there are not interchangeable.
+        If the test is going to run on a real device then make sure your app
+        is signed with correct development signature (as described in the above
+        Real Device Config document)
+
+        If this capability is not set then your test starts on Springboard view.
+        It is also possible to provide an URL where the app is located.
+        */
+        capabilities.setCapability("app", app.getAbsolutePath());
+
 
 
         driver = new IOSDriver<WebElement>(getServiceUrl(), capabilities);
