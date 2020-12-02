@@ -33,6 +33,14 @@ public class AndroidBasicInteractionsTest extends BaseTest {
         */
         capabilities.setCapability("deviceName", "Android Emulator");
 
+         /*
+        It makes sense to set device udid if there are multiple devices/emulators
+        connected to the local machine. Run `adb devices -l` to check which devices
+        are online and what are their identifiers.
+        If only one device is connected then this capability might be omitted
+        */
+         capabilities.setCapability("udid", "ABCD123456789");
+
 
         capabilities.setCapability("app", app.getAbsolutePath());
         driver = new AndroidDriver<WebElement>(getServiceUrl(), capabilities);
