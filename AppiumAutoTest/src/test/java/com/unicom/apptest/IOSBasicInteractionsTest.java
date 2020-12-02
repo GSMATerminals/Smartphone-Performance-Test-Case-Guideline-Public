@@ -47,6 +47,13 @@ public class IOSBasicInteractionsTest extends BaseTest {
         */
 //         capabilities.setCapability("udid", "ABCD123456789");
 
+         /*
+        Platform version is required to be set. Only the major and minor version numbers have effect.
+        Check `xcrun simctl list` to see which platform versions are available if the test is going
+        to run on a Simulator.
+        */
+        capabilities.setCapability("platformVersion", platformVersion == null ? "11.1" : platformVersion);
+
 
 
         driver = new IOSDriver<WebElement>(getServiceUrl(), capabilities);
