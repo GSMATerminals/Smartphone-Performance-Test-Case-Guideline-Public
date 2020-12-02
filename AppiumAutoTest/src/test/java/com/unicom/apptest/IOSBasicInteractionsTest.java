@@ -26,6 +26,15 @@ public class IOSBasicInteractionsTest extends BaseTest {
         String platformVersion = System.getenv("IOS_PLATFORM_VERSION");
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
+         /*
+        'deviceName' capability only affects device selection if you run the test in a cloud
+        environment or your run your test on a Simulator device. This combination of this value
+        plus `platformVersion` capability value
+        is used to select a proper Simulator if it already exists. Use `xcrun simctl list` command
+        to list available Simulator devices.
+        */
+        capabilities.setCapability("deviceName", deviceName == null ? "iPhone 6s" : deviceName);
+
         driver = new IOSDriver<WebElement>(getServiceUrl(), capabilities);
     }
 
