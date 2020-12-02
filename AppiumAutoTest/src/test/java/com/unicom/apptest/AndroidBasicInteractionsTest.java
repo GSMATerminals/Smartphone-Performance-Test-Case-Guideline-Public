@@ -42,7 +42,14 @@ public class AndroidBasicInteractionsTest extends BaseTest {
          capabilities.setCapability("udid", "ABCD123456789");
 
 
+         /*
+        It is recommended to set a full path to the app being tested.
+        Appium for Android supports application .apk and .apks bundles.
+        If this capability is not set then your test starts on Dashboard view.
+        It is also possible to provide an URL where the app is located.
+        */
         capabilities.setCapability("app", app.getAbsolutePath());
+
         driver = new AndroidDriver<WebElement>(getServiceUrl(), capabilities);
     }
 
