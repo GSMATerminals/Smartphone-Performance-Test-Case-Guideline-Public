@@ -50,6 +50,16 @@ public class AndroidBasicInteractionsTest extends BaseTest {
         */
         capabilities.setCapability("app", app.getAbsolutePath());
 
+         /*
+        By default Appium tries to autodetect the main application activity,
+        but if you app's very first activity is not the main one then
+        it is necessary to provide its name explicitly.
+        */
+        capabilities.setCapability("appActivity", "com.myapp.SplashActivity"));
+        capabilities.setCapability("appPackage", "com.myapp"));
+        capabilities.setCapability("appWaitActivity", "com.myapp.MainActivity"));
+
+
         driver = new AndroidDriver<WebElement>(getServiceUrl(), capabilities);
     }
 
