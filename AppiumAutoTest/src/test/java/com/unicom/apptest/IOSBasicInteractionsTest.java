@@ -70,6 +70,11 @@ public class IOSBasicInteractionsTest extends BaseTest {
         */
         capabilities.setCapability("app", app.getAbsolutePath());
 
+         /*
+        This is the only supported automation backend for iOS
+        */
+        capabilities.setCapability("automationName", "XCUITest");
+
 
 
         driver = new IOSDriver<WebElement>(getServiceUrl(), capabilities);
