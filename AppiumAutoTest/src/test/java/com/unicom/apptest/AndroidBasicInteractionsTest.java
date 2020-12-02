@@ -39,7 +39,7 @@ public class AndroidBasicInteractionsTest extends BaseTest {
         are online and what are their identifiers.
         If only one device is connected then this capability might be omitted
         */
-         capabilities.setCapability("udid", "ABCD123456789");
+        capabilities.setCapability("udid", "ABCD123456789");
 
 
          /*
@@ -58,6 +58,12 @@ public class AndroidBasicInteractionsTest extends BaseTest {
         capabilities.setCapability("appActivity", "com.myapp.SplashActivity"));
         capabilities.setCapability("appPackage", "com.myapp"));
         capabilities.setCapability("appWaitActivity", "com.myapp.MainActivity"));
+
+        /*Appium for Android supports multiple automation backends, where
+        each of them has its own pros and cons. The default one is UIAutomator2.
+        */
+        capabilities.setCapability("automationName", "UIAutomator2");
+        // capabilities.setCapability("automationName", "Espresso");
 
 
         driver = new AndroidDriver<WebElement>(getServiceUrl(), capabilities);
