@@ -26,6 +26,14 @@ public class AndroidBasicInteractionsTest extends BaseTest {
         File appDir = new File(classpathRoot, "../apps");
         File app = new File(appDir.getCanonicalPath(), "ApiDemos-debug.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
+
+         /*
+        'deviceName' capability only affects device selection if you run the test in a cloud
+        environment. It has no effect if the test is executed on a local machine.
+        */
+        capabilities.setCapability("deviceName", "Android Emulator");
+
+
         capabilities.setCapability("app", app.getAbsolutePath());
         driver = new AndroidDriver<WebElement>(getServiceUrl(), capabilities);
     }
