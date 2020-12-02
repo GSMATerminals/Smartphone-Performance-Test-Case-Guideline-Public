@@ -35,6 +35,20 @@ public class IOSBasicInteractionsTest extends BaseTest {
         */
         capabilities.setCapability("deviceName", deviceName == null ? "iPhone 6s" : deviceName);
 
+        /*
+        udid value must be set if you run your test on a real iOS device.
+        The udid of your real device could be retrieved from Xcode->Windows->Devices and Simulators
+        dialog.
+        Usually, it is not enough to simply provide udid itself in order to automate apps
+        on real iOS devices. You must also verify the target device is included into
+        your Apple developer profile and the WebDriverAgent is signed with a proper signature.
+        Refer https://github.com/appium/appium-xcuitest-driver/blob/master/docs/real-device-config.md
+        for more details.
+        */
+//         capabilities.setCapability("udid", "ABCD123456789");
+
+
+
         driver = new IOSDriver<WebElement>(getServiceUrl(), capabilities);
     }
 
