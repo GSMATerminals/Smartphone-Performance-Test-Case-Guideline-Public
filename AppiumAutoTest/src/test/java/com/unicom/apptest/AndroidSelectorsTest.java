@@ -33,5 +33,13 @@ public class AndroidSelectorsTest extends BaseTest {
         driver.quit();
     }
 
+    /**
+     * Look for element by accessibility. In Android this is the "content-desc"
+     */
+    @Test
+    public void testFindElementsByAccessibilityId () {
+        List<WebElement> searchParametersElement = (List<WebElement>) driver.findElementsByAccessibilityId("Content");
+        Assert.assertEquals(searchParametersElement.size(), 1);
+    }
 
 }
