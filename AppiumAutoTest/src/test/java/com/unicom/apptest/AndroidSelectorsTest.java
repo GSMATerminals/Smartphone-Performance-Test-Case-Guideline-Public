@@ -51,4 +51,13 @@ public class AndroidSelectorsTest extends BaseTest {
         Assert.assertEquals(actionBarContainerElements.size(), 1);
     }
 
+    /**
+     * Look for elements by the class name. In Android this is the Java Class Name of the view.
+     */
+    @Test
+    public void testFindElementsByClassName () {
+        List<WebElement> linearLayoutElements = (List<WebElement>) driver.findElementsByClassName("android.widget.FrameLayout");
+        Assert.assertTrue(linearLayoutElements.size() > 1);
+    };
+
 }
