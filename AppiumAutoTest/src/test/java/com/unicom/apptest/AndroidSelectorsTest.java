@@ -60,4 +60,13 @@ public class AndroidSelectorsTest extends BaseTest {
         Assert.assertTrue(linearLayoutElements.size() > 1);
     };
 
+    /**
+     * Find android elements by XPath
+     */
+    @Test
+    public void testFindElementsByXPath () {
+        List<WebElement> linearLayoutElements = (List<WebElement>) driver.findElementsByXPath("//*[@class=\"android.widget.FrameLayout\"]");
+        Assert.assertTrue(linearLayoutElements.size() > 1);
+    };
+
 }
