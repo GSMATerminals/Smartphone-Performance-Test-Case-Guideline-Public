@@ -32,4 +32,15 @@ public class IOSSelectorsTest extends BaseTest {
     public void tearDown() {
         driver.quit();
     }
+
+    /**
+     * This finds elements by "accessibility id", which in the case of IOS is the "name" attribute of the element
+     *
+     */
+    @Test
+    public void testFindElementsByAccessibilityID () {
+        List<WebElement> computeSumButtons = driver.findElementsByAccessibilityId("ComputeSumButton");
+        Assert.assertEquals(computeSumButtons.size(), 1);
+        computeSumButtons.get(0).click();
+    }
 }
