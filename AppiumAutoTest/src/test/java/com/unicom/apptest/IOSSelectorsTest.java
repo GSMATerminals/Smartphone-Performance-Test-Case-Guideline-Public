@@ -52,4 +52,14 @@ public class IOSSelectorsTest extends BaseTest {
         List<WebElement> windowElements = driver.findElementsByClassName("XCUIElementTypeWindow");
         Assert.assertTrue(windowElements.size() > 1);
     };
+
+    /**
+     * Find  element by IOS Predicate selector strategy.
+     *
+     */
+    @Test
+    public void testFindElementsByNSPredicateString () {
+        List<WebElement> allVisibleElements = driver.findElementsByIosNsPredicate("visible = true");
+        Assert.assertTrue(allVisibleElements.size() > 1);
+    };
 }
