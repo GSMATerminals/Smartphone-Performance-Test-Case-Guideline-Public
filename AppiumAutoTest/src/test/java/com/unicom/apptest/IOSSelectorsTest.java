@@ -71,4 +71,13 @@ public class IOSSelectorsTest extends BaseTest {
         List<WebElement> windowElements = driver.findElementsByIosClassChain("XCUIElementTypeWindow[1]/*[2]");
         Assert.assertEquals(windowElements.size(), 1);
     };
+
+    /**
+     * Can find source xml by calling "driver.source()", XPath is not recommended due to major performance issues
+     */
+    @Test
+    public void testFindElementsByXPath () {
+        List<WebElement> buttons = driver.findElementsByXPath("//XCUIElementTypeWindow//XCUIElementTypeButton");
+        Assert.assertTrue(buttons.size() > 1);
+    };
 }
