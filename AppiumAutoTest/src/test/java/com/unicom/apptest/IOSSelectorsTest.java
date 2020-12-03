@@ -43,4 +43,13 @@ public class IOSSelectorsTest extends BaseTest {
         Assert.assertEquals(computeSumButtons.size(), 1);
         computeSumButtons.get(0).click();
     }
+
+    /**
+     *  Find element by Class name
+     */
+    @Test
+    public void testFindElementsByClassName () {
+        List<WebElement> windowElements = driver.findElementsByClassName("XCUIElementTypeWindow");
+        Assert.assertTrue(windowElements.size() > 1);
+    };
 }
