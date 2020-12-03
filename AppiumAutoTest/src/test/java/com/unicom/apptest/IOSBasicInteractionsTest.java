@@ -105,5 +105,28 @@ public class IOSBasicInteractionsTest extends BaseTest {
         Assert.assertEquals(value, "Hello World!");
     }
 
+    @Test
+    public void testOpenAlert () {
+        // Find Button element and click on it
+        String buttonElementId = "show alert";
+        IOSElement buttonElement = (IOSElement) new WebDriverWait(driver, 30)
+                .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId(buttonElementId)));
+        buttonElement.click();
+
+        // Wait for the alert to show up
+        String alertTitleId = "Cool title";
+        IOSElement alertTitleElement = (IOSElement) new WebDriverWait(driver, 30)
+                .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId(alertTitleId)));
+
+        // Check the text
+        String alertTitle = alertTitleElement.getText();
+        Assert.assertEquals(alertTitle, "Cool title");
+
+        // Dismiss the alert
+        IOSElement okButtonElement = (IOSElement) new WebDriverWait(driver, 30)
+                .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("OK")));
+        okButtonElement.click();
+    }
+
 
 }
