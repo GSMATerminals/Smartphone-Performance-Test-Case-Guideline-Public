@@ -42,4 +42,13 @@ public class AndroidSelectorsTest extends BaseTest {
         Assert.assertEquals(searchParametersElement.size(), 1);
     }
 
+    /**
+     * Look for element by ID. In Android this is the "resource-id"
+     */
+    @Test
+    public void testFindElementsById () {
+        List<WebElement> actionBarContainerElements = (List<WebElement>) driver.findElementsById("android:id/action_bar_container");
+        Assert.assertEquals(actionBarContainerElements.size(), 1);
+    }
+
 }
