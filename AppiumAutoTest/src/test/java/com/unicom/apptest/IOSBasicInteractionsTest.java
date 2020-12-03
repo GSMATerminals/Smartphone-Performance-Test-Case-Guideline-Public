@@ -76,7 +76,6 @@ public class IOSBasicInteractionsTest extends BaseTest {
         capabilities.setCapability("automationName", "XCUITest");
 
 
-
         driver = new IOSDriver<WebElement>(getServiceUrl(), capabilities);
     }
 
@@ -85,6 +84,25 @@ public class IOSBasicInteractionsTest extends BaseTest {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    @Test
+    public void testSendKeysToInput () {
+        // Find TextField input element
+        String textInputId = "TextField1";
+        IOSElement textViewsEl = (IOSElement) new WebDriverWait(driver, 30)
+                .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId(textInputId)));
+
+        // Check that it doesn"t have a value
+        String value = textViewsEl.getAttribute("value");
+        Assert.assertEquals(value, null);
+
+        // Send keys to that input
+        textViewsEl.sendKeys("Hello World!");
+
+        // Check that the input has new value
+        value = textViewsEl.getAttribute("value");
+        Assert.assertEquals(value, "Hello World!");
     }
 
 
