@@ -62,4 +62,13 @@ public class IOSSelectorsTest extends BaseTest {
         List<WebElement> allVisibleElements = driver.findElementsByIosNsPredicate("visible = true");
         Assert.assertTrue(allVisibleElements.size() > 1);
     };
+
+    /**
+     * Find  element by  IOS-specific selector strategy. Similar to XPath. This is recommended over XPath.
+     */
+    @Test
+    public void testFindElementsByClassChain () {
+        List<WebElement> windowElements = driver.findElementsByIosClassChain("XCUIElementTypeWindow[1]/*[2]");
+        Assert.assertEquals(windowElements.size(), 1);
+    };
 }
