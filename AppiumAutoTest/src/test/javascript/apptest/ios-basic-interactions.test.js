@@ -64,5 +64,18 @@ describe('Basic IOS interactions', function () {
     assert.equal(value, 'Hello World!', 'Input should have newly input value');
   });
 
+  it('should click a button that opens an alert', async function () {
+    // Find Button element and click on it
+    const buttonElementId = `show alert`;
+    const buttonElement = await driver.waitForElementByAccessibilityId(buttonElementId);
+    await buttonElement.click();
 
+    // Wait for the alert to show up
+    const alertTitleId = `Cool title`;
+    const alertTitleElement = await driver.waitForElementByAccessibilityId(alertTitleId);
+
+    // Check the text
+    const alertTitle = await alertTitleElement.text();
+    assert.equal(alertTitle, `Cool title`);
+  });
 });
