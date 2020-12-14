@@ -59,5 +59,11 @@ describe('Basic Android selectors', function () {
     assert.equal(actionBarContainerElements.length, 1);
   });
 
+  it('should find elements by class name', async function () {
+    // Look for elements by the class name. In Android this is the Java Class Name of the view.
+    const linearLayoutElements = await driver.elementsByClassName('android.widget.FrameLayout');
+    assert.isAbove(linearLayoutElements.length, 1);
+  });
+
 
 });
