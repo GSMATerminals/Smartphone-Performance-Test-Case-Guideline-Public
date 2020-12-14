@@ -53,5 +53,11 @@ describe('Basic Android selectors', function () {
     assert.equal(searchParametersElement.length, 1);
   });
 
+  it('should find elements by ID', async function () {
+    // Look for element by ID. In Android this is the 'resource-id'
+    const actionBarContainerElements = await driver.elementsById('android:id/action_bar_container');
+    assert.equal(actionBarContainerElements.length, 1);
+  });
+
 
 });
