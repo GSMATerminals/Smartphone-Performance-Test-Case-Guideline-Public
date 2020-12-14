@@ -67,5 +67,21 @@ describe('Basic Android interactions', function () {
     assert.equal(searchTextValue, 'Hello world!');
   });
 
+  it('should click a button that opens an alert and then dismisses it', async function () {
+    // Open the 'Alert Dialog' activity of the android app
+    await driver.startActivity({appPackage: PACKAGE, appActivity: ALERT_DIALOG_ACTIVITY});
 
+    // Click button that opens a dialog
+    const openDialogButton = await driver.elementById('io.appium.android.apis:id/two_buttons');
+    await openDialogButton.click();
+
+    // Check that the dialog is there
+    const alertElement = await driver.waitForElementById('android:id/alertTitle');
+    const alertText = await alertElement.text();
+    assert.equal(alertText, `Lorem ipsum dolor sit aie consectetur adipiscing\nPlloaso mako nuto siwuf cakso dodtos anr koop.`);
+    const closeDialogButton = await driver.elementById('android:id/button1');
+
+    // Close the dialog
+    await closeDialogButton.click();
+  });
 });
