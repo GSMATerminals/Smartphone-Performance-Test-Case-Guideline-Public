@@ -47,4 +47,11 @@ describe('Basic Android selectors', function () {
     }
   });
 
+  it('should find elements by Accessibility ID', async function () {
+    // Look for element by accessibility. In Android this is the 'content-desc'
+    const searchParametersElement = await driver.elementsByAccessibilityId('Content');
+    assert.equal(searchParametersElement.length, 1);
+  });
+
+
 });
