@@ -52,4 +52,20 @@ describe('Basic Android interactions', function () {
     }
   });
 
+  it('should send keys to search box and then check the value', async function () {
+    // Enter text in a search box
+    const searchBoxElement = await driver.elementById('txt_query_prefill');
+    await searchBoxElement.sendKeys('Hello world!');
+
+    // Press on 'onSearchRequestedButton'
+    const onSearchRequestedButton = await driver.elementById('btn_start_search');
+    await onSearchRequestedButton.click();
+
+    // Check that the text matches the search term
+    const searchText = await driver.waitForElementById('android:id/search_src_text');
+    const searchTextValue = await searchText.text();
+    assert.equal(searchTextValue, 'Hello world!');
+  });
+
+
 });
