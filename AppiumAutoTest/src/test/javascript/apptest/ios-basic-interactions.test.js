@@ -47,5 +47,22 @@ describe('Basic IOS interactions', function () {
     }
   });
 
+  it('should send keys to inputs', async function () {
+    // Find TextField input element
+    const textInputId = `TextField1`;
+    const textViewsEl = await driver.waitForElementByAccessibilityId(textInputId);
+
+    // Check that it doesn't have a value
+    let value = await textViewsEl.getValue();
+    assert.isNull(value, 'Input should have no value');
+
+    // Send keys to that input
+    await textViewsEl.sendKeys('Hello World!');
+
+    // Check that the input has new value
+    value = await textViewsEl.getValue();
+    assert.equal(value, 'Hello World!', 'Input should have newly input value');
+  });
+
 
 });
