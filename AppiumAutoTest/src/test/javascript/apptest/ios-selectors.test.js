@@ -47,4 +47,12 @@ describe('Basic IOS selectors', function () {
     }
   });
 
+  it('should find elements by Accessibility ID', async function () {
+    // This finds elements by 'accessibility id', which in the case of IOS is the 'name' attribute of the element
+    const computeSumButtons = await driver.elementsByAccessibilityId('ComputeSumButton');
+    assert.equal(computeSumButtons.length, 1);
+    await computeSumButtons[0].click();
+  });
+
+
 });
