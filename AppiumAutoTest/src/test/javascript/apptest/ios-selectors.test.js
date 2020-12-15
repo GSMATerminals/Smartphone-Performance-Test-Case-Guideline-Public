@@ -60,5 +60,11 @@ describe('Basic IOS selectors', function () {
     assert.isAbove(windowElements.length, 1);
   });
 
+  it('should find elements by NSPredicateString', async function () {
+    // This is an IOS-specific selector strategy. See https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html for reference
+    const allVisibleElements = await driver.elements('-ios predicate string', 'visible = 1');
+    assert.isAbove(allVisibleElements.length, 1);
+  });
+
 
 });
