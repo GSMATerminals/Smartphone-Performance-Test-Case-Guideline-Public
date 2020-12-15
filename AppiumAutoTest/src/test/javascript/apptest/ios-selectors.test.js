@@ -72,5 +72,10 @@ describe('Basic IOS selectors', function () {
     assert.equal(windowElement.length, 3);
   });
 
-
+  it('should find elements by XPath', async function () {
+    // Can find source xml by calling `driver.source()`
+    // Note that XPath is not recommended due to major performance issues
+    const buttons = await driver.elementsByXPath('//XCUIElementTypeWindow//XCUIElementTypeButton');
+    assert.isAbove(buttons.length, 1, 'Should have more than one button');
+  });
 });
