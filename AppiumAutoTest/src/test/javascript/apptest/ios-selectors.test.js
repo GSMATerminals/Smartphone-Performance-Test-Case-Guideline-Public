@@ -54,5 +54,11 @@ describe('Basic IOS selectors', function () {
     await computeSumButtons[0].click();
   });
 
+  it('should find elements by class name', async function () {
+    // Find element by name
+    const windowElements = await driver.elementsByClassName('XCUIElementTypeWindow');
+    assert.isAbove(windowElements.length, 1);
+  });
+
 
 });
