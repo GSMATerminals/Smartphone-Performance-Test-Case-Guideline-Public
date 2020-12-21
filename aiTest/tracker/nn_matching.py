@@ -95,3 +95,43 @@ def _nn_cosine_distance(x, y):
     distances = _cosine_distance(x, y)
     return distances.min(axis=0)
 
+
+class NearestNeighborDistanceMetric(object):
+    """
+    A nearest neighbor distance metric that, for each target, returns
+    the closest distance to any sample that has been observed so far.
+
+    Parameters
+    ----------
+    metric : str
+        Either "euclidean" or "cosine".
+    matching_threshold: float
+        The matching threshold. Samples with larger distance are considered an
+        invalid match.
+    budget : Optional[int]
+        If not None, fix samples per class to at most this number. Removes
+        the oldest samples when the budget is reached.
+
+    Attributes
+    ----------
+    samples : Dict[int -> List[ndarray]]
+        A dictionary that maps from target identities to the list of samples
+        that have been observed so far.
+
+    """
+
+    def __init__(self, metric, matching_threshold, budget=None):
+
+
+        if metric == "euclidean":
+            self._metric = _nn_euclidean_distance
+        elif metric == "cosine":
+            self._metric = _nn_cosine_distance
+        else:
+            raise ValueError(
+                "Invalid metric; must be either 'euclidean' or 'cosine'")
+        self.matching_threshold = matching_threshold
+        self.budget = budget
+        self.samples = {}
+
+
