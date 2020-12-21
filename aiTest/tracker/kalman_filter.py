@@ -185,3 +185,45 @@ class KalmanFilter(object):
             kalman_gain, projected_cov, kalman_gain.T))
         return new_mean, new_covariance
 
+    def gating_distance(self, mean, covariance, measurements,
+                        only_position=False):
+        """Compute gating distance between state distribution and measurements.
+
+        A suitable distance threshold can be obtained from `chi2inv95`. If
+        `only_position` is False, the chi-square distribution has 4 degrees of
+        freedom, otherwise 2.
+
+        Parameters
+        ----------
+        mean : ndarray
+            Mean vector over the state distribution (8 dimensional).
+        covariance : ndarray
+            Covariance of the state distribution (8x8 dimensional).
+        measurements : ndarray
+            An Nx4 dimensional matrix of N measurements, each in
+            format (x, y, a, h) where (x, y) is the bounding box center
+            position, a the aspect ratio, and h the height.
+        only_position : Optional[bool]
+            If True, distance computation is done with respect to the bounding
+            box center position only.
+
+        Returns
+        -------
+        ndarray
+            Returns an array of length N, where the i-th element contains the
+            squared Mahalanobis distance between (mean, covariance) and
+            `measurements[i]`.
+
+        """
+        mean, covariance = self.project(mean, covariance)
+        if only_position:
+            mean, covariance = mean[:2], covariance[:2, :2]
+            measurements = measurements[:, :2]
+
+        cholesky_factor = np.linalg.cholesky(covariance)
+        d = measurements - mean
+        z = scipy.linalg.solve_triangular(
+            cholesky_factor, d.T, lower=True, check_finite=False,
+            overwrite_b=True)
+        squared_maha = np.sum(z * z, axis=0)
+        return squared_maha
