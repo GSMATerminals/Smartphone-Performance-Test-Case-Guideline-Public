@@ -53,3 +53,45 @@ def _cosine_distance(a, b, data_is_normalized=False):
         b = np.asarray(b) / np.linalg.norm(b, axis=1, keepdims=True)
     return 1. - np.dot(a, b.T)
 
+
+def _nn_euclidean_distance(x, y):
+    """ Helper function for nearest neighbor distance metric (Euclidean).
+
+    Parameters
+    ----------
+    x : ndarray
+        A matrix of N row-vectors (sample points).
+    y : ndarray
+        A matrix of M row-vectors (query points).
+
+    Returns
+    -------
+    ndarray
+        A vector of length M that contains for each entry in `y` the
+        smallest Euclidean distance to a sample in `x`.
+
+    """
+    distances = _pdist(x, y)
+    return np.maximum(0.0, distances.min(axis=0))
+
+
+def _nn_cosine_distance(x, y):
+    """ Helper function for nearest neighbor distance metric (cosine).
+
+    Parameters
+    ----------
+    x : ndarray
+        A matrix of N row-vectors (sample points).
+    y : ndarray
+        A matrix of M row-vectors (query points).
+
+    Returns
+    -------
+    ndarray
+        A vector of length M that contains for each entry in `y` the
+        smallest cosine distance to a sample in `x`.
+
+    """
+    distances = _cosine_distance(x, y)
+    return distances.min(axis=0)
+
