@@ -153,4 +153,25 @@ class NearestNeighborDistanceMetric(object):
                 self.samples[target] = self.samples[target][-self.budget:]
         self.samples = {k: self.samples[k] for k in active_targets}
 
+    def distance(self, features, targets):
+        """Compute distance between features and targets.
 
+        Parameters
+        ----------
+        features : ndarray
+            An NxM matrix of N features of dimensionality M.
+        targets : List[int]
+            A list of targets to match the given `features` against.
+
+        Returns
+        -------
+        ndarray
+            Returns a cost matrix of shape len(targets), len(features), where
+            element (i, j) contains the closest squared distance between
+            `targets[i]` and `features[j]`.
+
+        """
+        cost_matrix = np.zeros((len(targets), len(features)))
+        for i, target in enumerate(targets):
+            cost_matrix[i, :] = self._metric(self.samples[target], features)
+        return cost_matrix
