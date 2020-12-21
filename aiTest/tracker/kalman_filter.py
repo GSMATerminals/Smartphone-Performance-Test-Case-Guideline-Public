@@ -151,4 +151,37 @@ class KalmanFilter(object):
             self._update_mat, covariance, self._update_mat.T))
         return mean, covariance + innovation_cov
 
+    def update(self, mean, covariance, measurement):
+        """Run Kalman filter correction step.
+
+        Parameters
+        ----------
+        mean : ndarray
+            The predicted state's mean vector (8 dimensional).
+        covariance : ndarray
+            The state's covariance matrix (8x8 dimensional).
+        measurement : ndarray
+            The 4 dimensional measurement vector (x, y, a, h), where (x, y)
+            is the center position, a the aspect ratio, and h the height of the
+            bounding box.
+
+        Returns
+        -------
+        (ndarray, ndarray)
+            Returns the measurement-corrected state distribution.
+
+        """
+        projected_mean, projected_cov = self.project(mean, covariance)
+
+        chol_factor, lower = scipy.linalg.cho_factor(
+            projected_cov, lower=True, check_finite=False)
+        kalman_gain = scipy.linalg.cho_solve(
+            (chol_factor, lower), np.dot(covariance, self._update_mat.T).T,
+            check_finite=False).T
+        innovation = measurement - projected_mean
+
+        new_mean = mean + np.dot(innovation, kalman_gain.T)
+        new_covariance = covariance - np.linalg.multi_dot((
+            kalman_gain, projected_cov, kalman_gain.T))
+        return new_mean, new_covariance
 
