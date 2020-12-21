@@ -134,4 +134,23 @@ class NearestNeighborDistanceMetric(object):
         self.budget = budget
         self.samples = {}
 
+    def partial_fit(self, features, targets, active_targets):
+        """Update the distance metric with new data.
+
+        Parameters
+        ----------
+        features : ndarray
+            An NxM matrix of N features of dimensionality M.
+        targets : ndarray
+            An integer array of associated target identities.
+        active_targets : List[int]
+            A list of targets that are currently present in the scene.
+
+        """
+        for feature, target in zip(features, targets):
+            self.samples.setdefault(target, []).append(feature)
+            if self.budget is not None:
+                self.samples[target] = self.samples[target][-self.budget:]
+        self.samples = {k: self.samples[k] for k in active_targets}
+
 
