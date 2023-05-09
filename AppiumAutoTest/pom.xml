@@ -32,7 +32,7 @@ https://github.com/appium/appium/blob/2fe7ea7b098ba2145e3c7b4cc31276a3e26921ec/s
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.14.2</version>
+            <version>7.5.1</version>
             <scope>test</scope>
         </dependency>
 
